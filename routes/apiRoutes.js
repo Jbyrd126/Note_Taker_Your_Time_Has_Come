@@ -41,7 +41,7 @@ deleteFromFile('./db/db.json', noteId);
 
 res.status(200).send("Here it is man");}
 else {
-    res.status(400).json('Its fucked up')
+    res.status(400).json('Its broke mane')
 }
 });
 
