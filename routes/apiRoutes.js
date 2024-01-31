@@ -9,7 +9,7 @@ app.get('/notes', (req, res) =>
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
 );
 
-// POST Route for submitting feedback
+// POST Route for data of new incoming note
 app.post('/notes', (req, res) => {
   // Destructuring assignment for the items in req.body
   const { title, text,} = req.body;
@@ -20,7 +20,7 @@ app.post('/notes', (req, res) => {
     const newNote = {
       title,
       text,
-      id: uuid(),
+      id: uuid(), // add unique indentifier to each new note
     };
 //add new note to the file
     readAndAppend(newNote, './db/db.json');
@@ -31,7 +31,7 @@ app.post('/notes', (req, res) => {
     res.json('Error in posting note');
   }
 });
-
+//delete note from db.json
 app.delete('/notes/:id', (req, res)=>{
 
     const noteId = req.params.id;
