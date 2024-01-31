@@ -2,9 +2,9 @@
 const express = require('express');
 const htmlRoutes = require('./routes/htmlRoutes');
 const apiRoutes = require('./routes/apiRoutes');
-// const path = require("path");
 
-//setting express and modular port
+
+//setting modular port
 const PORT = process.env.PORT || 3001;
 
 
@@ -12,7 +12,7 @@ const app = express();
 
 
 
-// Express to set route 
+// Express to set route to homeslice
 app.use(express.static("public"));
 
 // Middleware for parsing JSON and urlencoded form data

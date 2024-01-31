@@ -30,7 +30,7 @@ const readAndAppend = (content, file) => {
     }
   });
 };
-
+// added a delet function for notes stored in the db.json
 const deleteFromFile= (file, id) => {
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
