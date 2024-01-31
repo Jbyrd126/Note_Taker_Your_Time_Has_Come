@@ -13,4 +13,4 @@ router.get('*', (req, res) => {
 });
 
 
-module.expots = router;
+module.exports = router;

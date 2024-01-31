@@ -1,21 +1,41 @@
-const router = require('express').Router()
+const app = require('express').Router()
 const fs = require('fs');
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
-const uuid = require('../helpers/uuid');
-const { response } = require('express');
-const { get } = require('http');
+const { readFromFile, readAndAppend, deleteFromFile } = require('../helpers/fsUtils');
+const uuid  = require('../helpers/uuid')
 
 
-router.get('/notes', (req,res)=>{
-    console.log(req.body);
+
+app.get('/notes', (req, res) =>
+  readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
+);
+
+// POST Route for submitting feedback
+app.post('/notes', (req, res) => {
+  // Destructuring assignment for the items in req.body
+  const { title, text,} = req.body;
+
+  // If all the required properties are present
+  if (title && text ) {
+    // Variable for the object we will save
     const newNote = {
-        title: req.body.title,
-        text: req.body.text
+      title,
+      text,
+      id: uuid(),
     };
+//add new note to the file
+    readAndAppend(newNote, './db/db.json');
 
-    readAndAppend(newNote, "./db/db.json")
-    res.json('Ahh fuckin give it to me!');
-
+   //respond to the route 
+    res.status(200).send("message recieved");
+  } else {
+    res.json('Error in posting note');
+  }
 });
 
-module.exports = router;
+app.delete('/notes/:id', (req, res)=>
+deleteFromFile('./db/db.json').then((data) => res.json(JSON.parse(data))));
+
+
+
+
+module.exports = app;
