@@ -32,9 +32,18 @@ app.post('/notes', (req, res) => {
   }
 });
 
-app.delete('/notes/:id', (req, res)=>
-deleteFromFile('./db/db.json').then((data) => res.json(JSON.parse(data))));
+app.delete('/notes/:id', (req, res)=>{
 
+    const noteId = req.params.id;
+
+    if (noteId){
+deleteFromFile('./db/db.json', noteId);
+
+res.status(200).send("Here it is man");}
+else {
+    res.status(400).json('Its fucked up')
+}
+});
 
 
 

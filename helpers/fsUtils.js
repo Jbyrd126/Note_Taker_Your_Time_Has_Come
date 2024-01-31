@@ -31,7 +31,7 @@ const readAndAppend = (content, file) => {
   });
 };
 
-const deleteFromFile= (content, file) => {
+const deleteFromFile= (file, id) => {
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
